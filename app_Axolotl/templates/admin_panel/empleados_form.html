@@ -1,0 +1,108 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Agregar/Editar Empleado</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <style>
+        body { background: linear-gradient(180deg, #fff0fb 0%, #ffe6f6 100%) !important; color: #2b0030; }
+        .admin-card { background: #fff0fa !important; }
+        form input, form select { background: #fff; border: 2px solid #c51a8d; color: #2b0030; padding: 10px; border-radius: 8px; width: 100%; box-sizing: border-box; }
+        .buttons{ display:flex; gap:12px; margin-top:12px; align-items:center; }
+        h2{ color:#ff66cc; }
+    </style>
+</head>
+<body class="content-with-footer" style="padding:18px;">
+    <div style="max-width:720px; margin: 12px auto;">
+        <div class="admin-card">
+            <h2 style="color:#ff66cc; margin-top:0;">{% if user_obj %}Editar{% else %}Agregar{% endif %} Empleado</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    {% if user_obj %}
+                        <div class="form-row">
+                            <label for="id_username">Nombre de usuario:</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="field-errors">{{ form.username.errors }}</div>
+                            {% endif %}
+                            {# Eliminado texto de ayuda de nombre de usuario #}
+                        </div>
+
+                        <div class="form-row">
+                            <label for="id_email">Email:</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="field-errors">{{ form.email.errors }}</div>
+                            {% endif %}
+                            {% if form.email.help_text %}
+                                <small class="help-text">{{ form.email.help_text }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            <label for="id_tel">Teléfono:</label>
+                            {{ form.tel }}
+                            {% if form.tel.errors %}
+                                <div class="field-errors">{{ form.tel.errors }}</div>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="form-row">
+                            <label for="id_username">Nombre de usuario:</label>
+                            {{ form.username }}
+                            {% if form.username.errors %}
+                                <div class="field-errors">{{ form.username.errors }}</div>
+                            {% endif %}
+                            {# Eliminado texto de ayuda de nombre de usuario #}
+                        </div>
+
+                        <div class="form-row">
+                            <label for="id_email">Email:</label>
+                            {{ form.email }}
+                            {% if form.email.errors %}
+                                <div class="field-errors">{{ form.email.errors }}</div>
+                            {% endif %}
+                            {% if form.email.help_text %}
+                                <small class="help-text">{{ form.email.help_text }}</small>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            <label for="id_tel">Teléfono:</label>
+                            {{ form.tel }}
+                            {% if form.tel.errors %}
+                                <div class="field-errors">{{ form.tel.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            <label for="id_password1">Contraseña:</label>
+                            {{ form.password1 }}
+                            {% if form.password1.errors %}
+                                <div class="field-errors">{{ form.password1.errors }}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="form-row">
+                            <label for="id_password2">Confirmación de contraseña:</label>
+                            {{ form.password2 }}
+                            {% if form.password2.errors %}
+                                <div class="field-errors">{{ form.password2.errors }}</div>
+                            {% endif %}
+                            
+                        </div>
+                    {% endif %}
+                </div>
+                {# Eliminado checkbox de is_staff, todos los empleados serán administradores #}
+                <div style="display:flex; gap:12px; align-items:center; margin-top:8px;">
+                    <button type="submit">Guardar</button>
+                    <a href="{% url 'ver_empleados' %}" style="color:#5a005a; font-weight:700;">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% include "footer.html" %}
+</body>
+</html>

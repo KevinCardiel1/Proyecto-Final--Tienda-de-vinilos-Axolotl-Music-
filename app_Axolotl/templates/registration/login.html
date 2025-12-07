@@ -1,0 +1,3 @@
+{% comment %} Compatibility shim: Django's auth.LoginView looks for registration/login.html.
+   Include the project's custom `login.html` so built-in redirects work. {% endcomment %}
+{% include 'login.html' %}
